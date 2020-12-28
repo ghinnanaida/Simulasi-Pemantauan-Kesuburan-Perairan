@@ -1,0 +1,306 @@
+{% extends 'layout.html '%}
+{% block title%}Station 4{% endblock%}
+{% block content%} 
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-header card">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <i class="icofont icofont icofont icofont-direction-sign bg-c-yellow"></i>
+                                <div class="d-inline">
+                                    <h4>Station 4</h4>
+                                    <span>Real time fertlity detection and monitoring</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-body">
+                    <div class="row">
+                        <!-- card1 start -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card widget-card-1">
+                                <div class="card-block-small">
+                                    <i class="icofont icofont-leaf bg-c-blue card1-icon"></i>
+                                    <span class="text-c-blue f-w-600">Chlorophyll</span>
+                                    <h4 class="sensor1"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- card1 end -->
+                        <!-- card1 start -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card widget-card-1">
+                                <div class="card-block-small">
+                                    <i class="icofont icofont-atom bg-c-pink card1-icon"></i>
+                                    <span class="text-c-pink f-w-600">DO (mg/l)</span>
+                                    <h4 class="sensor2"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- card1 end -->
+                        <!-- card1 start -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card widget-card-1">
+                                <div class="card-block-small">
+                                    <i class="icofont icofont-test-bulb bg-c-green card1-icon"></i>
+                                    <span class="text-c-green f-w-600">pH</span>
+                                    <h4 class="sensor3"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- card1 end -->
+                        <!-- card1 start -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card widget-card-1">
+                                <div class="card-block-small">
+                                    <i class="icofont icofont-test-tube bg-c-yellow card1-icon"></i>
+                                    <span class="text-c-yellow f-w-600">Salinity (ppm)</span>
+                                    <h4 class="sensor4"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- card1 end -->
+                        <!-- Statestics Start -->
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" id="data-klorofil">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" id="data-do">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" id="data-ph">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" id="data-salinity">
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var chartKloro;
+                    var chartDo;
+                    var chartpH;
+                    var chartSalinity;
+              
+                    function requestData() {
+                      var requests = $.get("/data4");
+                      var tm = requests.done(function (result) {
+                        var seriesKloro = chartKloro.series[0],
+                          shiftKloro = seriesKloro.data.length > 20;
+                        var seriesDo = chartDo.series[0],
+                          shiftDo = seriesKloro.data.length > 20;
+                        var seriespH = chartpH.series[0],
+                          shiftpH = seriesKloro.data.length > 20;
+                        var seriesSalinity = chartSalinity.series[0],
+                          shiftSalinity = seriesKloro.data.length > 20;
+              
+                        // Add the Point
+                        // Time kloro\
+                        var data1 = [];
+                        data1.push(result[0]);
+                        data1.push(result[1]);
+              
+                        // Add the Point
+                        // Time do
+                        var data2 = [];
+                        data2.push(result[0]);
+                        data2.push(result[2]);
+            
+                        // Add the Point
+                        // Time ph
+                        var data3 = [];
+                        data3.push(result[0]);
+                        data3.push(result[3]);
+                        
+                        // Add the Point
+                        // Time salinity
+                        var data4 = [];
+                        data4.push(result[0]);
+                        data4.push(result[4]);
+        
+                        chartKloro.series[0].addPoint(data1, true, shiftKloro);
+                        chartDo.series[0].addPoint(data2, true, shiftDo);
+                        chartpH.series[0].addPoint(data3, true, shiftpH);
+                        chartSalinity.series[0].addPoint(data4, true, shiftSalinity);
+                        $(".sensor1").text("");
+                        $(".sensor1").text(Math.round(data1[1]));
+              
+                        $(".sensor2").text("");
+                        $(".sensor2").text(Math.round(data2[1]));
+            
+                        $(".sensor3").text("");
+                        $(".sensor3").text(Math.round(data3[1]));
+              
+                        $(".sensor4").text("");
+                        $(".sensor4").text(Math.round(data4[1]));
+              
+                        // call it again after one second
+                        setTimeout(requestData, 2000);
+                      });
+                    }
+              
+                    $(document).ready(function () {
+                      // --------------Chart 1 ----------------------------
+                      chartKloro = new Highcharts.Chart({
+                        chart: {
+                          renderTo: "data-klorofil",
+                          defaultSeriesType: "line",
+                          events: {
+                            load: requestData,
+                          },
+                        },
+                        title: {
+                          text: "Chlorophyll-a",
+                        },
+                        xAxis: {
+                          type: "datetime",
+                          tickPixelInterval: 150,
+                          maxZoom: 20 * 1000,
+                        },
+                        yAxis: {
+                          minPadding: 0.2,
+                          maxPadding: 0.2,
+                          title: {
+                            text: "Value",
+                            margin: 80,
+                          },
+                        },
+                        series: [
+                          {
+                            color: "#fcba03",
+                            lineColor: "#ffea00",
+                            name: "Chlorophyll-a",
+                            data: [],
+                          },
+                        ],
+                      });
+                      // --------------Chart 1 Ends - -----------------
+              
+                      chartDo = new Highcharts.Chart({
+                        chart: {
+                          renderTo: "data-do",
+                          defaultSeriesType: "line",
+                          events: {
+                            load: requestData,
+                          },
+                        },
+                        title: {
+                          text: "Dissolve Oxygen",
+                        },
+                        xAxis: {
+                          type: "datetime",
+                          tickPixelInterval: 150,
+                          maxZoom: 20 * 1000,
+                        },
+                        yAxis: {
+                          minPadding: 0.2,
+                          maxPadding: 0.2,
+                          title: {
+                            text: "Value",
+                            margin: 80,
+                          },
+                        },
+                        series: [
+                          {
+                            color: "#fcba03",
+                            lineColor: "#ffea00",
+                            name: "Dissolve oxygen",
+                            data: [],
+                          },
+                        ],
+                      });
+                    //   grafik3 start
+                      chartpH = new Highcharts.Chart({
+                        chart: {
+                          renderTo: "data-ph",
+                          defaultSeriesType: "line",
+                          events: {
+                            load: requestData,
+                          },
+                        },
+                        title: {
+                          text: "pH",
+                        },
+                        xAxis: {
+                          type: "datetime",
+                          tickPixelInterval: 150,
+                          maxZoom: 20 * 1000,
+                        },
+                        yAxis: {
+                          minPadding: 0.2,
+                          maxPadding: 0.2,
+                          title: {
+                            text: "Value",
+                            margin: 80,
+                          },
+                        },
+                        series: [
+                          {
+                            color: "#fcba03",
+                            lineColor: "#ffea00",
+                            name: "pH",
+                            data: [],
+                          },
+                        ],
+                      });
+                    //   chart4
+                    chartSalinity = new Highcharts.Chart({
+                        chart: {
+                          renderTo: "data-salinity",
+                          defaultSeriesType: "line",
+                          events: {
+                            load: requestData,
+                          },
+                        },
+                        title: {
+                          text: "Salinity",
+                        },
+                        xAxis: {
+                          type: "datetime",
+                          tickPixelInterval: 150,
+                          maxZoom: 20 * 1000,
+                        },
+                        yAxis: {
+                          minPadding: 0.2,
+                          maxPadding: 0.2,
+                          title: {
+                            text: "Value",
+                            margin: 80,
+                          },
+                        },
+                        series: [
+                          {
+                            color: "#fcba03",
+                            lineColor: "#ffea00",
+                            name: "Salinity",
+                            data: [],
+                          },
+                        ],
+                      });
+                    });
+                  </script>
+        <div id="styleSelector">
+
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

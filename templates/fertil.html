@@ -1,0 +1,46 @@
+{% extends 'layout.html '%}
+{% block title%}Fertility Maps{% endblock%}
+{% block content%}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-header start -->
+                <div class="page-header card">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <i class="icofont icofont-map bg-c-pink"></i>
+                                <div class="d-inline">
+                                   <h4>Fertility Maps</h4>
+                                   <span>Map shows real time fertility every station</span>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Page-header end -->
+
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- Basic map start -->
+                            <div class="card">
+                                <div class="card-block">
+                                    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+                                </div>
+                            </div>
+                            <!-- Basic map end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="styleSelector">
+
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

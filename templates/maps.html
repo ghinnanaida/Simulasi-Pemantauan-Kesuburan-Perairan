@@ -1,0 +1,99 @@
+{% extends 'layout.html '%}
+{% block title%}Locaction Maps{% endblock%}
+{% block content%} 
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-header start -->
+                <div class="page-header card">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <i class="icofont icofont-map bg-c-pink"></i>
+                                <div class="d-inline">
+                                   <h4>Refer-DM Location</h4>
+                                   <span>Map shows Refer-DM location</span>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Page-header end -->
+
+                <div class="page-body">
+                    <div class="row">
+                         <!-- card1 start -->
+                         <div class="col-md-6 col-xl-3">
+                             <a href="/stasiun1">
+                            <div class="card widget-card-1">
+                                <div class="card-block-small">
+                                    <i class="icofont icofont-location-pin bg-c-blue card1-icon"></i>
+                                    <span class="text-c-blue f-w-600">Station 1</span>
+                                    <h4 class="sensor1"></h4>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <!-- card1 end -->
+                        <!-- card1 start -->
+                        <div class="col-md-6 col-xl-3">
+                            <a href="/stasiun2">
+                            <div class="card widget-card-1">
+                                <div class="card-block-small">
+                                    <i class="icofont icofont-location-pin bg-c-pink card1-icon"></i>
+                                    <span class="text-c-pink f-w-600">Station 2</span>
+                                    <h4 class="sensor2"></h4>
+                                </div>
+                            </div>
+                        </a>
+                            
+                        </div>
+                        <!-- card1 end -->
+                        <!-- card1 start -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card widget-card-1">
+                                <div class="card-block-small">
+                                    <i class="icofont icofont-location-pin bg-c-green card1-icon"></i>
+                                    <a href="/stasiun3">
+                                    <span class="text-c-green f-w-600">Station 3</span>
+                                    </a>
+                                    <h4 class="sensor1"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- card1 end -->
+                        <!-- card1 start -->
+                        <div class="col-md-6 col-xl-3">
+                            <a href="/stasiun4">
+                            <div class="card widget-card-1">
+                                <div class="card-block-small">
+                                    <i class="icofont icofont-location-pin bg-c-yellow card1-icon"></i>
+                                    <span class="text-c-yellow f-w-600">Station 4</span>
+                                    <h4 class="sensor4"></h4>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <!-- card1 end -->
+                        <div class="col-sm-12">
+                            <!-- Basic map start -->
+                            <div class="card">
+                                <div class="card-block">
+                                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1z-6ja8tcsKytfJakxeBlVlhqO5cWyT2t" width="100%" height="480"></iframe>
+                                </div>
+                            </div>
+                            <!-- Basic map end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="styleSelector">
+
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
